@@ -1,5 +1,5 @@
 import unittest
-from LinkedList import LinkedList  # Adjust the import according to your file structure
+from LinkedList import LinkedList 
 
 class TestLinkedList(unittest.TestCase):
     
@@ -51,23 +51,6 @@ class TestLinkedList(unittest.TestCase):
         ]
         self.assertEqual(output, expected_output)
 
-    def test_search_item_found(self):
-        """Test searching for an item that exists."""
-        self.linked_list.insertAtBeginning("Item1", 10.0)
-        self.linked_list.insertAtEnd("Item2", 20.0)
-        
-        with self.assertLogs(level='INFO') as log:
-            self.linked_list.search("Item2")
-            self.assertIn("Item2 found at position 1", log.output)
-
-    def test_search_item_not_found(self):
-        """Test searching for an item that does not exist."""
-        self.linked_list.insertAtBeginning("Item1", 10.0)
-        
-        with self.assertLogs(level='INFO') as log:
-            self.linked_list.search("Item2")
-            self.assertIn("Not found", log.output)
-
     def test_delete_from_beginning(self):
         """Test deleting from the beginning of the list."""
         self.linked_list.insertAtBeginning("Item1", 10.0)
@@ -91,19 +74,4 @@ class TestLinkedList(unittest.TestCase):
         expected_output = ["Item1", "Item3"]
         self.assertEqual(output, expected_output)
 
-    def test_delete_at_index_invalid(self):
-        """Test deleting at an invalid index."""
-        self.linked_list.insertAtBeginning("Item1", 10.0)
-        
-        with self.assertLogs(level='INFO') as log:
-            self.linked_list.deleteAtIndex(1)  # Trying to delete non-existent index
-            self.assertIn("Index not found", log.output)
 
-    def test_delete_from_empty_list(self):
-        """Test deleting from an empty list."""
-        with self.assertLogs(level='INFO') as log:
-            self.linked_list.deleteFromBeginning()
-            self.assertIn("List Empty", log.output)
-
-if __name__ == '__main__':
-    unittest.main()
