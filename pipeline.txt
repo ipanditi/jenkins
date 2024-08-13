@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+ 
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the repository from GitHub
+                git branch: 'main', url: 'https://github.com/ipanditi/jenkins.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                // Run the build command
+                bat 'python LinkedList.py build'
+            }
+        }
+        stage('Test') {
+            steps {
+                // Run the test command
+                bat 'python UnitTesting.py test'
+            }
+        }
+    }
+ 
+    post {
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed. Check the logs for more details.'
+        }
+    }
+}
